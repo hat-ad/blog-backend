@@ -10,16 +10,12 @@ const BlogService = require("../services/blog.services");
 exports.createBlog = async (req, res) => {
   try {
     const { userCode } = req.payload;
-    const {
-      title,
-      content,
-      // image,
-      readTime,
-    } = req.body;
+    const { title, content, image, readTime } = req.body;
     const blog = await BlogService.createBlog({
       title,
       content,
       image:
+        image ||
         "https://cf-assets.www.cloudflare.com/slt3lc6tev37/7Dy6rquZDDKSJoeS27Y6xc/4a671b7cc7894a475a94f0140981f5d9/what_is_a_cdn_distributed_server_map.png",
       readTime,
       author: userCode,

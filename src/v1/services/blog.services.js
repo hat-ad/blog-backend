@@ -14,6 +14,7 @@ exports.getBlogs = async ({ slug = "", page = 1, limit = 5 }) => {
   }
   const blogs = await db.Blog.find(query)
     .populate("authorInfo")
+    .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
     .lean();

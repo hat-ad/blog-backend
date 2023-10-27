@@ -6,7 +6,7 @@ exports.uploadSingleFile = (req, res) => {
 
     if (file) {
       const { fileName } = file;
-      const filePath = `${process.env.BACKEND_BASE_URL}/images/${req.file.filename}`;
+      const filePath = `${process.env.BACKEND_BASE_URL}images/${req.file.filename}`;
       OK(res, { fileName, location: filePath }, "File uploaded successfully");
     } else {
       ERROR(res, null, "Something went wrong");

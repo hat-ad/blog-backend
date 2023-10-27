@@ -1,0 +1,60 @@
+Merchant_category_list:
+id,
+company name,
+category,
+isActive
+
+transactions
+
+id,
+amount,
+transaction_time,
+category: id,
+transaction_type - UPI/CASH,
+userCode,
+
+
+user:
+
+id,
+first name
+last name,
+userCode,
+token,
+createdAt,
+updatedAt,
+phone,
+otp,
+isActive,
+
+
+const transString = "Thank you for using for a transaction of Rs.262.00 at SWIGGY's on 14/12/2022 18:37:01."
+
+
+const wordsExtracted = transString.split(" ");
+
+const extractedData = {
+amount:0,
+transaction_time:Date(),
+category:null,
+transaction_type:null,
+}
+
+for(const words of wordsExtracted){
+	
+	/// rest mappings
+	
+	const response = await db.MerchantCategoryList.findOne({company_name:words.trim().toLowerCase()});
+	if(response){
+	extractedData.category = response.id
+	}
+}
+
+if(!extractedData.category){
+	const response = await db.MerchantCategoryList.findOne({category:"UNKNOWN_CATEGORY"});
+	if(response){
+	extractedData.category = response.id
+	}
+}
+
+/// create transaction
